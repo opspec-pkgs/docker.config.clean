@@ -1,0 +1,55 @@
+---
+name: github.com/opspec-pkgs/docker.config.clean
+version: 1.0.0
+description: |
+  Cleans a docker configuration object for safe usage within ops. Specifically, this ensures docker in docker won't attempt to use an authentication helper.
+inputs:
+  dockerConfig:
+    object:
+      description: |
+        The JSON of a docker configuration file.
+      constraints:
+        properties:
+          auths:
+            type: object
+            description: |
+              Keys are registry hostname/urls and values contain authentication information
+            additionalProperties:
+              type: object
+              properties:
+                auth:
+                  description: Base64 encoded string of the format `{username}:{password}`
+                  type: string
+                  format: base64
+          credsStore:
+            type: string
+outputs:
+  dockerConfigCleaned:
+    object:
+      description: |
+        The JSON of a docker configuration file.
+      constraints:
+        properties:
+          auths:
+            type: object
+            description: |
+              Keys are registry hostname/urls and values contain authentication information
+            additionalProperties:
+              type: object
+              properties:
+                auth:
+                  description: Base64 encoded string of the format `{username}:{password}`
+                  type: string
+                  format: base64
+run:
+  serial:
+  - container:
+      image: { ref: 'mwendler/jq' }
+      files:
+        /input: $(dockerConfig)
+        /output: $(dockerConfigCleaned)
+      cmd:
+        - sh
+        - -ce
+        - |
+          cat /input | jq '{auths: .auths}' > /output
