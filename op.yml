@@ -52,4 +52,4 @@ run:
         - sh
         - -ce
         - |
-          cat /input | jq '{auths: .auths}' > /output
+          cat /input | jq 'if .auths != null then {auths: .auths} else {auths: {}} end' > /output
