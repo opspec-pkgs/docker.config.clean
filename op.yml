@@ -45,7 +45,7 @@ outputs:
 run:
   serial:
   - container:
-      image: { ref: "backplane/jq" }
+      image: { ref: 'backplane/jq' }
       files:
         /input: $(dockerConfig)
         /output: $(dockerConfigCleaned)
