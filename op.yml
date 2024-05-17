@@ -23,11 +23,6 @@ inputs:
                   format: base64
           credsStore:
             type: string
-  jqRef:
-    string:
-      description: |
-        Image reference with jq on shell path
-      default: backplane/jq
 
 outputs:
   dockerConfigCleaned:
@@ -50,7 +45,7 @@ outputs:
 run:
   serial:
   - container:
-      image: { ref: $(jqRef) }
+      image: { ref: "backplane/jq" }
       files:
         /input: $(dockerConfig)
         /output: $(dockerConfigCleaned)
