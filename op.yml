@@ -1,6 +1,6 @@
 ---
 name: github.com/opspec-pkgs/docker.config.clean
-version: 1.0.1
+version: 1.1.0
 description: |
   Cleans a docker configuration object for safe usage within ops. Specifically, this ensures docker in docker won't attempt to use an authentication helper.
 inputs:
@@ -23,6 +23,7 @@ inputs:
                   format: base64
           credsStore:
             type: string
+
 outputs:
   dockerConfigCleaned:
     object:
@@ -44,7 +45,7 @@ outputs:
 run:
   serial:
   - container:
-      image: { ref: 'mwendler/jq' }
+      image: { ref: 'backplane/jq' }
       files:
         /input: $(dockerConfig)
         /output: $(dockerConfigCleaned)
