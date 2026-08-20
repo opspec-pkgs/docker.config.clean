@@ -11,20 +11,20 @@ Cleans a docker configuration object for safe usage within ops. Specifically, th
 ## Visualize
 
 ```shell
-opctl ui github.com/opspec-pkgs/docker.config.clean#1.1.0
+opctl ui github.com/opspec-pkgs/docker.config.clean#1.1.1
 ```
 
 ## Run
 
 ```
-opctl run github.com/opspec-pkgs/docker.config.clean#1.1.0
+opctl run github.com/opspec-pkgs/docker.config.clean#1.1.1
 ```
 
 ## Compose
 
 ```yaml
 op:
-  ref: github.com/opspec-pkgs/docker.config.clean#1.1.0
+  ref: github.com/opspec-pkgs/docker.config.clean#1.1.1
   inputs:
     dockerConfig:  # 👈 required; provide a value
   outputs:
